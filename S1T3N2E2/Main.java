@@ -28,7 +28,7 @@ public class Main {
 		
 		//mostrem la llista
 		for (Restaurant restaurant : LlistaRestaurants) {
-			System.out.println("Nom: " + restaurant.getNom() + " " + "," + "Puntuacion: " + restaurant.getPuntuacio() + " puntos.");
+			System.out.println("Nom: " + restaurant.getNom() + " " + "," + "Puntuació: " + restaurant.getPuntuacio() + " punts.");
 	}
 }
 }
