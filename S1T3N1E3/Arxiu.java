@@ -5,15 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Random;
-import java.util.Scanner;
 
 public class Arxiu {
-	private static HashMap<String, String> paisos = new HashMap<String, String>();
-	private static Scanner entrada = new Scanner(System.in);
-	
-	private static String nom = "";
-	private static int punts = 0;
 
 	//mètode per trobar un archiu que no retornarà res
 	/*public void trobarArchiu() {
@@ -36,10 +29,11 @@ public class Arxiu {
 	}
 }
 */
-	public static void escriureArxiu() {
+	public static String escriureArxiu(String nom, int punts) {
 		
 		String frase = "El jugador " + nom + " ha fet una puntuació de: " + punts + " punts.\n";
-
+		
+		
 		try {
 			FileWriter escriptura = new FileWriter("C:\\Users\\Usuario\\eclipse-workspace\\S1T3\\src\\S1T3N1E3\\classificacio.txt", true);
 			// en el cas que existeixi o no un fitxer "classificacio" em de possar true per anar afegin i no fer sobreescriptura
@@ -52,14 +46,16 @@ public class Arxiu {
 		} catch (IOException e) {
 			System.out.println("No s'ha trobat l'arxiu.");
 	}
+		return frase;
 		
 	}
 	
 //mètode per trobar un archiu que no retornarà res
-public static void llegirArchiu() throws IOException {
+public static  HashMap<String, String> llegirArchiu() throws IOException {
 	String frase;
 	String pais;
 	String capital;
+	HashMap<String, String> paisos = new HashMap<String, String>();
 	
 	try { //buscar l'arxiu, com a nota tot el que importem de java.io ens obligarà a fer try/catch per fer Excepcions controlades
 		FileReader texte1 = new FileReader("C:\\Users\\Usuario\\eclipse-workspace\\S1T3\\src\\S1T3N1E3\\countries.txt");
@@ -95,44 +91,6 @@ public static void llegirArchiu() throws IOException {
 		// TODO Auto-generated catch block
 		System.out.println("Nos s'ha trobat l'arxiu.");
 	} 
+	return paisos;
 }
-	
-public static void preguntes() {
-	int preguntesTotal = 10;
-	
-	System.out.println("Indica el nom del jugador: ");
-	nom = entrada.next();
-	
-	Object[] nomPaisos = paisos.values().toArray();//creem una colecció amb .values i .toArray torna tots els elements
-	
-	for (int i = 0; i < preguntesTotal; i++) {//farà 10 preguntes
-		Object pregAleatoria = nomPaisos[new Random().nextInt(nomPaisos.length)]; //agafem els values.
-		System.out.println("Quina es la capital de " + pregAleatoria);
-		String capitalJugador = entrada.next();
-		
-		for (String capitals : paisos.keySet()) {//comparem amb els keys
-			
-			if (pregAleatoria.equals(paisos.get(capitals))) {
-				if(capitalJugador.equals(capitals)){//comparació de la pregunta del jugador amb les capitals
-					punts++;
-				System.out.println("Pregunta CORRECTE" + " " + punts + " punts.\n");
-				
-				}else {
-					System.out.println("Pregunta FALLADA" + " " + punts + " punts.\n");
-				}
-				
-				if(punts == 5) {
-					System.out.println("GUAU PORTES 5 PUNTS.\n");
-				}else if (punts == 8) {
-					System.out.println("BESTIAL PORTES 8 PUNTS.\n");
-				}else if (punts == 10) {
-					System.out.println("PERFECT.\n");
-				}
-			}
-	}
-}
-	System.out.println("FI DE LA PARTIDA. GRÀCIES PER JUGAR A CAPITALS DEL MÓN.");
-	System.out.println("El jugador " + nom + " ha fet una puntuació de: " + punts + " punts.");
-}
-
 }
